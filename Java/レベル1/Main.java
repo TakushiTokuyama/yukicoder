@@ -3,6 +3,7 @@ package レベル1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.util.stream.Stream;
 
 class Main {
@@ -25,8 +26,9 @@ class Main {
             l = reader.readLine();
             n = reader.readLine();
             block = reader.readLine();
+            reader.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
 
         int[] numbers = Stream.of(block.split(" ")).mapToInt(Integer::parseInt).sorted().toArray();
