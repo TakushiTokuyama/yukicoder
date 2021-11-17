@@ -10,14 +10,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import javax.xml.transform.stax.StAXResult;
-
 class Main {
     public static void main(String[] args) {
         // no5();
         // no18();
         // no21();
-        no24();
+        // no24();
+        no26();
     }
 
     // No.5 数字のブロック
@@ -152,6 +151,51 @@ class Main {
             reader.close();
         } catch (IOException e) {
             throw new UncheckedIOException(e);
+        }
+    }
+
+    // No.26 シャッフルゲーム
+    private static void no26() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        // カップの位置
+        int correct;
+        // 回数
+        int turn;
+        // 入れ替え位置
+        int[][] replacement;
+
+        try {
+            String co = reader.readLine();
+            correct = Integer.parseInt(co);
+
+            String tn = reader.readLine();
+            turn = Integer.parseInt(tn);
+
+            replacement = new int[turn][];
+
+            for (int i = 0; i < turn; i++) {
+                String line = reader.readLine();
+                replacement[i] = Stream.of(line.split(" ")).mapToInt(Integer::parseInt).toArray();
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        String[] cups = new String[3];
+
+        cups[correct - 1] = String.valueOf(correct);
+
+        for (int i = 0; i < replacement.length; i++) {
+            String cup = cups[replacement[i][0] - 1];
+            cups[replacement[i][0] - 1] = cups[replacement[i][1] - 1];
+            cups[replacement[i][1] - 1] = cup;
+        }
+
+        for (int i = 0; i < cups.length; i++) {
+            if (cups[i] != null) {
+                System.out.println(i + 1);
+            }
         }
     }
 }
