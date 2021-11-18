@@ -16,7 +16,8 @@ class Main {
         // no18();
         // no21();
         // no24();
-        no26();
+        // no26();
+        no29();
     }
 
     // No.5 数字のブロック
@@ -197,5 +198,62 @@ class Main {
                 System.out.println(i + 1);
             }
         }
+    }
+
+    // No.29 パワーアップ
+    private static void no29() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        // 敵を倒す回数
+        int turn;
+        // もらえるアイテム
+        int[] itemList;
+
+        try {
+            String co = reader.readLine();
+            turn = Integer.parseInt(co);
+
+            int[][] items = new int[turn][];
+
+            itemList = new int[turn * 3];
+
+            for (int i = 0, k = 0; i < turn; i++) {
+                String line = reader.readLine();
+                items[i] = Stream.of(line.split(" ")).mapToInt(Integer::parseInt).toArray();
+                for (int j = 0; j < 3; j++) {
+                    itemList[k] = items[i][j];
+                    k++;
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        Arrays.sort(itemList);
+
+        // レベルアップ回数
+        int count = 0;
+
+        // 重複値と任意の値をカウントする
+        for (int i = 0, j = 0; i < itemList.length; i++) {
+
+            if (i == itemList.length - 1) {
+                j++;
+                count += (j / 4);
+                break;
+            }
+
+            if (itemList[i] == itemList[i + 1]) {
+                count++;
+                i++;
+                if(itemList.length - 1){
+                    break;
+                }
+            } else {
+                j++;
+            }
+        }
+
+        System.out.println(count);
     }
 }
