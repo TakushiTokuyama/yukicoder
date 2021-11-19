@@ -17,7 +17,8 @@ class Main {
         // no21();
         // no24();
         // no26();
-        no29();
+        // no29();
+        no32();
     }
 
     // No.5 数字のブロック
@@ -246,7 +247,8 @@ class Main {
             if (itemList[i] == itemList[i + 1]) {
                 count++;
                 i++;
-                if(itemList.length - 1){
+                if (i == itemList.length - 1) {
+                    count += (j / 4);
                     break;
                 }
             } else {
@@ -255,5 +257,41 @@ class Main {
         }
 
         System.out.println(count);
+    }
+
+    // No.32 貯金箱の憂鬱
+    private static void no32() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // 100円硬貨
+        int $100;
+        // 25円硬貨
+        int $25;
+        // 1円硬貨
+        int $1;
+
+        try {
+
+            String L = reader.readLine();
+            $100 = Integer.parseInt(L);
+            String M = reader.readLine();
+            $25 = Integer.parseInt(M);
+            String N = reader.readLine();
+            $1 = Integer.parseInt(N);
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        int total = 0;
+
+        total += $1 - 25 * ($1 / 25);
+        $25 += $1 / 25;
+        total += $25 - 4 * ($25 / 4);
+        $100 += $25 / 4;
+        total += $100 - 10 * ($100 / 10);
+
+        System.out.println(total);
     }
 }
