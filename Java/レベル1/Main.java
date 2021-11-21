@@ -18,7 +18,8 @@ class Main {
         // no24();
         // no26();
         // no29();
-        no32();
+        // no32();
+        no35();
     }
 
     // No.5 数字のブロック
@@ -271,7 +272,6 @@ class Main {
         int $1;
 
         try {
-
             String L = reader.readLine();
             $100 = Integer.parseInt(L);
             String M = reader.readLine();
@@ -293,5 +293,62 @@ class Main {
         total += $100 - 10 * ($100 / 10);
 
         System.out.println(total);
+    }
+
+    // タイパー高橋
+    private static void no35() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // 100円硬貨
+        int n;
+        // 時間
+        int[] t;
+        // 文字列
+        String[] m;
+
+        try {
+            String L = reader.readLine();
+            n = Integer.parseInt(L);
+
+            t = new int[n];
+            m = new String[n];
+
+            for (int i = 0; i < n; i++) {
+                String tm = reader.readLine();
+                String[] array = tm.split(" ");
+                t[i] = Integer.parseInt(array[0]);
+                m[i] = array[1];
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        // 一文字あたりの入力時間
+        double inputTime = 1000d / 12d;
+
+        // 成功
+        int typeOk = 0;
+
+        // 打ち漏らし
+        int typeMiss = 0;
+
+        for (int i = 0; i < n; i++) {
+            int typeCorrect = (int)(t[i] / inputTime);
+
+            if (typeCorrect == 0) {
+                typeMiss += m[i].length();
+                continue;
+            }
+
+            if (m[i].length() <= typeCorrect) {
+                typeOk += m[i].length();
+            } else {
+                typeOk += typeCorrect;
+                typeMiss += m[i].length() - typeCorrect;
+            }
+        }
+
+        System.out.println(typeOk + " " + typeMiss);
     }
 }
