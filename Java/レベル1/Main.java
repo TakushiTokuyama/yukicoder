@@ -354,7 +354,7 @@ class Main {
     }
 
     // はじめのn歩
-    private static void no46(){
+    private static void no46() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // 一歩
@@ -374,6 +374,6 @@ class Main {
             throw new UncheckedIOException(e);
         }
 
-        System.out.println((b / a) + b % a == 0 ? 0 : 1);
+        System.out.println((b / a) + (b % a == 0 ? 0 : 1));
     }
 }
