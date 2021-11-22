@@ -19,7 +19,8 @@ class Main {
         // no26();
         // no29();
         // no32();
-        no35();
+        // no35();
+        no46();
     }
 
     // No.5 数字のブロック
@@ -334,7 +335,7 @@ class Main {
         int typeMiss = 0;
 
         for (int i = 0; i < n; i++) {
-            int typeCorrect = (int)(t[i] / inputTime);
+            int typeCorrect = (int) (t[i] / inputTime);
 
             if (typeCorrect == 0) {
                 typeMiss += m[i].length();
@@ -350,5 +351,29 @@ class Main {
         }
 
         System.out.println(typeOk + " " + typeMiss);
+    }
+
+    // はじめのn歩
+    private static void no46(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // 一歩
+        int a;
+        // 区間
+        int b;
+
+        try {
+            String line = reader.readLine();
+            String[] lines = line.split(" ");
+
+            a = Integer.parseInt(lines[0]);
+            b = Integer.parseInt(lines[1]);
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        System.out.println((b / a) + b % a == 0 ? 0 : 1);
     }
 }
